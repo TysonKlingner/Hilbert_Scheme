@@ -1,0 +1,150 @@
+\documentclass[12pt]{amsart}
+\usepackage{mathrsfs,amssymb, amsmath, mathdots, xcolor, tikz-cd}
+
+
+\textwidth = 160mm
+\textheight = 240mm
+\evensidemargin=0mm
+\oddsidemargin=0mm
+\hoffset=-1mm
+\voffset=-22mm
+\parskip =1mm
+\parindent = 5mm
+\linespread{1.2}
+\footskip10mm
+\pagestyle{plain}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{defprop}[theorem]{Definition-Proposition}
+
+\numberwithin{equation}{section}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{construction}[theorem]{Construction}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{convention}[theorem]{Convention}
+\newtheorem{notation}[theorem]{Notation}
+
+\DeclareSymbolFont{script}{U}{eus}{m}{n}
+\DeclareMathSymbol{\Wedge}{0}{script}{"5E}
+
+\newcommand{\laplacian}{\Delta}
+\newcommand{\cA}{\mathscr{A}} 
+\newcommand{\grad}{\operatorname{gradient \ term}} 
+\newcommand{\cG}{\mathcal{G}} 
+\newcommand{\cI}{\mathcal{I}} 
+\newcommand{\RR}{\mathbb{R}} 
+\renewcommand{\AA}{\mathbb{A}} 
+\newcommand{\DD}{\mathbb{D}}
+\newcommand{\NN}{\mathbb{N}} 
+\newcommand{\hH}{\mathbb{H}} 
+\newcommand{\CC}{\mathbb{C}} 
+\newcommand{\cC}{\mathcal{C}} 
+\newcommand{\cK}{\mathcal{K}} 
+\newcommand{\ZZ}{\mathbb{Z}} 
+\newcommand{\cX}{\mathfrak{X}} 
+\newcommand{\cY}{\mathcal{Y}} 
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\GGm}{\mathbb{G}_m}
+\newcommand{\GG}{\mathbb{G}}
+\newcommand{\RRPP}{\mathbb{RP}} 
+\newcommand{\PP}{\mathbb{P}} 
+\newcommand{\fF}{\mathcal{F}} 
+\newcommand{\cL}{\mathcal{L}} 
+\newcommand{\gG}{\mathcal{G}} 
+\renewcommand{\AA}{\mathbb{A}} 
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\cF}{\mathcal{F}} 
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cU}{\mathcal{U}}  
+\newcommand{\cP}{\mathcal{P}} 
+\newcommand{\Frac}{\operatorname{Frac}}
+\newcommand{\Proj}{\operatorname{Proj}}
+\newcommand{\trdeg}{\operatorname{trdeg}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\htt}{\operatorname{ht}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\Bl}{\operatorname{Bl}}
+\newcommand{\Gr}{\mathrm{Gr}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\bsim}{\sim_{\operatorname{bir}}}
+\newcommand{\bir}{\operatorname{bir}}
+\newcommand{\dR}{\operatorname{dR}}
+\newcommand{\dB}{\operatorname{dB}}
+\newcommand{\HH}{\operatorname{H}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\bH}{\mathbb{H}}
+\newcommand{\Exc}{\operatorname{Exc}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\Ric}{\operatorname{Ric}}
+\newcommand{\Pic}{\operatorname{Pic}}
+\newcommand{\NS}{\operatorname{NS}}
+\newcommand{\PGL}{\operatorname{PGL}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\dvol}{d\mathrm{vol}}
+\newcommand{\Sch}{\mathrm{Sch}}
+\newcommand{\pr}{\mathrm{pr}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Hilb}{\mathrm{Hilb}}
+\newcommand{\Schet}{\mathrm{Sch}_{\text{\'et}}}
+\newcommand{\Schfpqc}{\mathrm{Sch}_{\text{fpqc}}}
+\newcommand{\Spec}{\mathrm{Spec}}
+\newcommand{\Supp}{\mathrm{Supp}}
+\newcommand{\coker}{\mathrm{coker}}
+\renewcommand{\div}{\operatorname{div}}
+\let\bar\overline
+\let\phi\varphi
+\let\tilde\widetilde
+\let\hat\widehat
+\let\epsilon\varepsilon
+
+\newcommand\mapsfrom{\mathrel{\reflectbox{\ensuremath{\mapsto}}}}
+
+
+% you can add more abbreviations of your own here
+
+\begin{document}
+
+\title{Hilbert Scheme}
+
+\author{Tyson Klingner}
+
+
+\date{\today}  % the date on which the report was finished
+
+\maketitle 
+
+\section{Introduction}
+
+To understand the geometry of a given algebraic variety $X$ we often need to understand some of its subschemes. 
+For example, if $X = \PP^n$, then all of its smooth degree $d$ hypersurfaces are diffeomorphic. 
+When studying subschemes one quickly sees that subschemes comes in families, e.g.,
+\[
+V(xy-tz^2) \subseteq \PP^2_{x,y,z} \times \AA^1_t
+\]
+defines a family of conics in $\PP^2.$
+Hence, to understand subschemes we will study them in families. 
+We achieve this via the {\em Hilbert functor}. 
+Once we introduce the Hilbert functor we will show that the Hilbert functor is represetable by a projective scheme, which we call the {\em Hilbert scheme}.
+In what proceeds we work over $k= \bar{k}$. 
+Every construction extends to the relative setting, but we work over $k$ for simplicity.
+
+\section{Hilbert Functor}
+
+Let $X/k$ be a projective variety and let $\mathcal{O}_X(1)$ be a fixed very ample line bundle. Before defining the Hilbert functor we will introduce the {\em Hibert polynomial.}
+
+\begin{defprop}
+
+\end{defprop}
+
+
+
+\end{document}
