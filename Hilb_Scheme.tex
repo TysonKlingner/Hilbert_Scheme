@@ -18,7 +18,7 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{defprop}[theorem]{Definition-Proposition}
+
 
 \numberwithin{equation}{section}
 
@@ -32,6 +32,7 @@
 \newtheorem{conjecture}[theorem]{Conjecture}
 \newtheorem{convention}[theorem]{Convention}
 \newtheorem{notation}[theorem]{Notation}
+\newtheorem{defprop}[theorem]{Definition-Proposition}
 
 \DeclareSymbolFont{script}{U}{eus}{m}{n}
 \DeclareMathSymbol{\Wedge}{0}{script}{"5E}
@@ -63,6 +64,7 @@
 \renewcommand{\AA}{\mathbb{A}} 
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\cF}{\mathcal{F}} 
+\newcommand{\cE}{\mathcal{E}} 
 \newcommand{\cR}{\mathcal{R}}
 \newcommand{\cU}{\mathcal{U}}  
 \newcommand{\cP}{\mathcal{P}} 
@@ -142,8 +144,44 @@ Every construction extends to the relative setting, but we work over $k$ for sim
 Let $X/k$ be a projective variety and let $\mathcal{O}_X(1)$ be a fixed very ample line bundle. Before defining the Hilbert functor we will introduce the {\em Hibert polynomial.}
 
 \begin{defprop}
-
+Let $\cF$ be a coherent sheaf on $X$, then there is a numerical polynomial $P(z) \in \QQ[z]$, such that $\chi(\cF(n)) = P_{\cF}(n)$ for every $n \in \ZZ.$
+We call $P_{\cF}$ the {\em Hilbert polynomial} of $\cF$ with respect to $\mathcal{O}_X(1).$
+If $Z \subset X$ is a closed subscheme, then we define the {\em Hilbert polynomial} of $Z$ to be $P_{\mathcal{O}_Z}.$ 
 \end{defprop}
+
+\begin{proposition}[Properties of Hilbert Polynomials]
+    Here we collect some basics properties of Hilbert polynomials
+\begin{enumerate}
+    \item Suppose there is a short exact sequence of coherent sheaves
+    \[
+    0 \to \cE \to \cF \to \cG \to 0.
+    \]
+    Then, 
+    \[
+    P_{\cF}(n) = P_{\cE}(n) + P_{\cG}(n)
+    \]
+    \item 
+\end{enumerate}
+\end{proposition}    
+
+\begin{example}
+Suppose $X = \PP^m$. Then, $\chi(\mathcal{O}_{\PP^m}(n)) = {{m+n}\choose m}$ for $n > > 0$ so the Hilbert polynomial of $\PP^m$ is given by
+\[
+P_{\PP^m}(n) = {{m+n}\choose{m}}, \ \ \ n > > 0
+\]
+In particular,
+\[
+P_{\PP^2}(n) = \frac{(n+1)(n+2)}{2}, \ \ \ n > > 0.
+\]
+If $C \subseteq \PP^2$ is a degree $d$ curve, then there is a short exact sequence
+\[
+0 \to \mathcal{O}_{\PP^2}(n-d) \to \mathcal{O}_{\PP^2}(n) \to \mathcal{O}_C(n) \to 0
+\]
+and since $P_C(n) = P_{\PP^2}(n) - P_{\PP^2}(n-d)$, it follows that
+\[
+P_C(n) = dn - \frac{1}{2}d(d-3), \ \ \ n > > 0.
+\]
+\end{example}    
 
 
 
