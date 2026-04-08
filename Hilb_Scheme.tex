@@ -96,6 +96,7 @@
 \newcommand{\pr}{\mathrm{pr}}
 \newcommand{\Hom}{\mathrm{Hom}}
 \newcommand{\Hilb}{\mathrm{Hilb}}
+\newcommand{\Univ}{\mathrm{Univ}}
 \newcommand{\Schet}{\mathrm{Sch}_{\text{\'et}}}
 \newcommand{\Schfpqc}{\mathrm{Sch}_{\text{fpqc}}}
 \newcommand{\Spec}{\mathrm{Spec}}
@@ -146,7 +147,7 @@ Let $X/k$ be a projective variety and let $\mathcal{O}_X(1)$ be a fixed very amp
 \begin{defprop}
 Let $\cF$ be a coherent sheaf on $X$, then there is a numerical polynomial $P(z) \in \QQ[z]$, such that $\chi(\cF(n)) = P_{\cF}(n)$ for every $n \in \ZZ.$
 We call $P_{\cF}$ the {\em Hilbert polynomial} of $\cF$ with respect to $\mathcal{O}_X(1).$
-If $Z \subset X$ is a closed subscheme, then we define the {\em Hilbert polynomial} of $Z$ to be $P_{\mathcal{O}_Z}.$ 
+If $Z \subset X$ is a closed subscheme, then we define the {\em Hilbert polynomial} of $Z$ to be $P_{\mathcal{O}_Z}.$
 \end{defprop}
 
 \begin{proposition}[Properties of Hilbert Polynomials]
@@ -160,9 +161,27 @@ If $Z \subset X$ is a closed subscheme, then we define the {\em Hilbert polynomi
     \[
     P_{\cF}(n) = P_{\cE}(n) + P_{\cG}(n)
     \]
-    \item 
+    \item If $X\to Y$ is a flat morphism where $Y$ is a projective variety, then each fibre $X_y$ has the same Hilbert polynomial.
+    Moreover, if $Y$ is integral and if the fibre have the same Hilbert polynomial, then $X \to Y$ is flat.
 \end{enumerate}
-\end{proposition}    
+\end{proposition}  
+
+By virtue of (2) we can talk about the Hilbert polynomial relative to a projective morphism.
+
+\begin{defprop}
+    If $g : Y \to Z$ is a projective morphism with $\mathcal{O}_{Y/Z}(1)$ relatively ample and $Z$ connected we can define the Hilbert polynomial of $\cF$ where $\cF$ is a coherent sheaf on $Y$, which is flat over $Z$. 
+Indeed, since $\cF$ is flat over $Z$ the Hilbert polynomial is constant in the fibres, and in particular
+\[
+Z \ni z \mapsto h^0(Y_z, \cF(n) |_{Y_z}) \in \NN
+\]
+is constant for $n > > 0$ so by cohomology and basechange $g_* \cF(n)$ is locally free for $n > > 0.$
+There is a numerical polynomial $P_{\cF}$ such that $\mathrm{rank}(g_*\cF(n)) = P_{\cF}(n)$ for $n > > 0.$
+The relative Hilbert polynomial is invariant under pullback:
+\begin{enumerate}
+    \item If $p : Z' \to Z$ is any morphism and $\cF'$ is the pullback of $\cF$ to $Y \times_Z Z'$, then the Hilbert polynomial of $\cF$ agrees with the Hilbert polynomial of $\cF'.$
+    Hence, we can compute the Hilbert polynomial of $\cF$ over any fibre.  
+\end{enumerate}
+\end{defprop}
 
 \begin{example}
 Suppose $X = \PP^m$. Then, $\chi(\mathcal{O}_{\PP^m}(n)) = {{m+n}\choose m}$ for $n > > 0$ so the Hilbert polynomial of $\PP^m$ is given by
@@ -183,6 +202,106 @@ P_C(n) = dn - \frac{1}{2}d(d-3), \ \ \ n > > 0.
 \]
 \end{example}    
 
+\begin{definition}
+    Let $X/k$ and $\mathcal{O}_X(1)$ be as above. Then, the {\em Hibert functor} is defined by
+    \[
+    \Hilb(X) : \mathsf{Sch}/k \to \mathsf{Sets}
+    \]
+    \[
+    \Hilb(X)(Z)= \left \{\substack{\mbox{Subschemes $V \subseteq X \times Z$} \\ \mbox{which are proper and flat over $Z$}}\right \}.
+    \]
+    If $P \in \QQ[z]$ is a numerical polynomial, then we have the subfunctor
+    \[
+    \Hilb_P(X) : \mathsf{Sch}/k \to \mathsf{Sets}
+    \]
+    \[
+    \Hilb_P(X)(Z) = \left \{\substack{\mbox{Subschemes $V \subseteq X \times Z$} \\ \mbox{which are proper and flat over $Z$} \\ \mbox{and have Hilbert polynomial $P$}}\right \}.
+    \]
+    Note that 
+    \[
+    \Hilb(X) = \cup_P \, \Hilb_P(X).
+    \]
+\end{definition}
+
+\section{Representability}
+
+It is a fundamental result in higher dimension geometry that the Hilbert functor is representable.
+
+\begin{theorem}
+Let $X/k$ be a projective variety with very ample line bundle $\mathcal{O}_X(1)$, and let $P \in \QQ[z]$ be a numerical polynomial. 
+Then the functor $\Hilb_P(X)$ is represented by a morphism $u : \Univ_P(X) \to H_P$ where $\Univ_P(X) \subseteq X \times H_P$ and $H_P/k$ is projective.
+That is,
+\[
+\Hom(Z, H_P) \ni g \mapsto g^*(u) \in \Hilb_P(X)(Z)
+\]
+defines an isomorphism.
+We call the representing scheme $H_P$ the {\em Hilbert scheme} and by abuse of notaion we often write $H_P = \Hilb_P(X)$ understanding we are referencing the scheme. 
+\end{theorem}    
+
+The proof is deep and relies on several non-trivial result from algebraic geometry.
+We will only outline the key ideas. 
+Before doing so we will explicitly compute an example.
+
+\begin{example}
+    We will compute the Hilbert scheme of degree $d$ curves in $\PP^2_k.$
+    By a curve we mean a closed subscheme defined by the zero locus of a degree $d$ homogenous polynomial $f \in k[x,y,z]$.
+    Any such curve can be written as 
+    $
+    f = a_0x^d + \ldots, a_nz^d
+    $
+    where $n = {{d+2}\choose{2}}-1.$
+    By associating $V(f) \mapsto (a_0, \ldots, a_n)$ we a one-to-correspondence
+    \[
+    \{\text{degree $d$ plane curves}\} \simeq \PP^n.
+    \]
+    Recall that any degree $d$ plane curve has Hilbert polynomial
+    \[
+    P = dn - \frac{1}{2}d(d-3)
+    \]
+    and we claim that under this correspondence $\Hilb_P(\PP^2) = \PP^n.$
+    For this to be true we need a universal family. 
+    Consider the {\em tautological family} $\mathcal{C} \subseteq \PP^2 \times \PP^n$ defined by 
+    \[
+    \mathcal{C} := V(a_0x^d + \ldots + a_nz^d)
+    \]
+    where $(x,y,z)$ are the homogenous coordinates of $\PP^2$, and $(a_0, \ldots, a_n)$ the homogenous coordinates of $\PP^n.$
+    Over every $a = (a_0, \ldots, a_n)$ the fibre $\mathcal{C}_a \subseteq \PP^2$ is the curve defined by the polynomial with coefficeints $a_0, \ldots, a_n$.
+    Now, for every $k$-scheme $Z$ and $V \in \Hilb_P(\PP^2)(Z)$ we need unique morphisms filling in the following Cartesian diagram
+    \[
+    \begin{tikzcd}
+    V \arrow[d] \arrow[r, dotted] & \cC \arrow[d] \\
+    Z \arrow[r, dotted]           & \PP^n        
+\end{tikzcd}
+    \]
+    We will demonstrate the morphism for when $Z = \Spec A$ is a finite type affine scheme where the general case follows by gluing.
+    Hence, $V \subseteq \PP^2_A$ has Hilbert polynomial 
+    \[
+    P_V(n) = dn - \frac{1}{2}d(d-3)
+    \]
+    and $\mathcal{I}_V$ has Hilbert polynomial
+    \[
+    P_{\mathcal{I}_V}(n) = {{d+2}\choose{2}} - P_V(n)
+    \]
+    Observe that $P_{I_{V}}(d) = 1$ so by cohomology and basechange $\pi_* \mathcal{I}_V(d) \to \Spec A$ is a line bundle.
+    After localizing we may assume that $\pi_* \mathcal{I}_V(d)$ is free with trivialising section
+    \[
+    f \in \HH^0(V, \mathcal{I}_V(d)).
+    \]
+    Since the image $f_s$ of $f$ in over each fibre $s \in \Spec A$ generates the ideal sheaf $\mathcal{I}_{V, s}$ it follows that $I_V = (f)$ where $f \in A[x,y,z].$
+    We write $f = a_0 x^d + \cdots a_n z^d$ for $a_i \in A$ and let $a_i^s$ denote the image of $a_i$ in $\kappa(s) \simeq k.$ 
+    Therefore, we obtain a morphism
+    \[
+    \Spec A \ni s \mapsto (a_0^s, \ldots, a_n^s) \in \PP^n.
+    \]
+    From here it is clear we have a Cartesian square
+    \[
+    \begin{tikzcd}
+V \arrow[d] \arrow[r] & \cC \arrow[d] \\
+Z \arrow[r]           & \PP^n        
+\end{tikzcd}
+    \]
+    Therefore, $\Hilb_P(\PP^2) = \PP^n$ and $\Univ_P(\PP^2) = \mathcal{C}.$
+\end{example}
 
 
 \end{document}
