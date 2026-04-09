@@ -242,7 +242,7 @@ The proof is deep and relies on several non-trivial result from algebraic geomet
 We will only outline the key ideas. 
 Before doing so we will explicitly compute an example.
 
-\begin{example}
+\begin{example} \label{hilb of degree d}
     We will compute the Hilbert scheme of degree $d$ curves in $\PP^2_k.$
     By a curve we mean a closed subscheme defined by the zero locus of a degree $d$ homogenous polynomial $f \in k[x,y,z]$.
     Any such curve can be written as 
@@ -303,5 +303,38 @@ Z \arrow[r]           & \PP^n
     Therefore, $\Hilb_P(\PP^2) = \PP^n$ and $\Univ_P(\PP^2) = \mathcal{C}.$
 \end{example}
 
+\section{Properties of the Hilbert Scheme}
+
+\begin{theorem}
+    Let $X/k$ be a projective variety with very ample line bundle $\mathcal{O}_X(1)$, and
+    Let $\Hilb_P(X/S)$ denote the Hilbert scheme with fixed Hilbert polynomial $P$. 
+    The Hilbert scheme has the following properties:
+    \begin{enumerate}
+        \item The Zariski tangent space to $\Hilb_P(X)$ at $[V] \in \Hilb(X/k)$ is given by $\HH^0(V, \mathcal{N})$ where $\mathcal{N}$ is the normal sheaf of $V$ in $X$;
+        \item If $V$ is a locally complete intersection, and if $\HH^1(V, \mathcal{N}) = 0$, then $\Hilb_P(X)$ is nonsingular at the point $[V]$ with
+        \[
+        \dim_{[V]}\Hilb_P(X) = h^0(V, \mathcal{N}).
+        \] 
+        \item In any case, if $V$ is a locally complete intersection, the dimension of $H$ at $[V]$ is at least $h^0(V, \mathcal{N}) - h^1(V, \mathcal{N})$, i.e.,
+        \[
+        \dim_{[V]}\Hilb_P(X) \ge h^0(V, \mathcal{N}) - h^1(V, \mathcal{N}).
+        \]
+    \end{enumerate}
+\end{theorem}
+
+The theorem is deep and instead of prving it we will demonstrate it for the Hilbert scheme from Example \ref{hilb of degree d}.
+
+\begin{example}
+    Consider the Hibert scheme $\Hilb_P(\PP^2) = \PP^n$ parameterizing degree $d$ plane curves from Example \ref{hilb of degree d}.
+    Let $X \subset \PP^2_k$ be a degree $d$ curve so that $\mathcal{I}_X = \mathcal{O}_{\PP^2}(-d).$
+    We already know that $\PP^n$ is smooth of dimension $n$ so we will verify the dimension conditions asserted by the Theorem.
+    Every hypersurface of projective space is a complete intersection, and $\mathcal{N} \simeq \mathcal{O}_X(d)$ defines a line bundle.
+    Moreover, we have the following short exact sequence
+    \[
+    0 \to \mathcal{O}_{\PP^2} \to \mathcal{O}_{\PP^2}(d) \to \mathcal{O}_X(d) \to 0.
+    \]
+    By taking the long exact sequence in cohomology and using well-known vanishing results we see $h^0(\mathcal{O}_V(d)) = {{d+2}\choose{2}}-1 = n$ and $h^1(\mathcal{O}_V(d)) = 0.$
+    Hence, by (2) $\Hilb_P(\PP^2)$ is nonsingular at $[X]$ with dimension $n$, which agrees with our example. 
+\end{example}
 
 \end{document}
